@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.example.composetutorial.ui.theme.ComposeTutorialTheme
 
@@ -28,17 +26,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-//            ComposeTutorialTheme {
-//                // A surface container using the 'background' color from the theme
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colorScheme.background
-//                ) {
-//                    Greeting("Android")
-//                }
-//            }
-//            Greeting(name = "Jeffro")
-            MessageCard(msg = Message("Jeff", "I have a story to tell"))
+
+            ComposeTutorialTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    MessageCard(msg = Message("Jeff", "I have a story to tell"))
+                }
+            }
+
         }
 
 
@@ -54,7 +48,9 @@ fun MessageCard(msg: Message) {
         Image(
             painter = painterResource(R.drawable.profile_picture),
             contentDescription = "Content Profile Picture",
-            modifier = Modifier.size(40.dp).clip(CircleShape)
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
         )
 
         Spacer(modifier = Modifier.width(8.dp))
@@ -67,27 +63,14 @@ fun MessageCard(msg: Message) {
 
 }
 
-@Preview
-@Composable
-fun Greeting(name: String = "Fred", modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposeTutorialTheme {
-        Greeting("Android")
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun MessagePreview() {
     ComposeTutorialTheme {
-        MessageCard(msg = Message("Jeff", "I have a story to tell"))
+        Surface {
+            MessageCard(msg = Message("Jeff", "I have a story to tell"))
+        }
     }
+
+
 }
