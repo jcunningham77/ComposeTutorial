@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -33,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
             ComposeTutorialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    MessageCard(msg = Message("Jeff", "I have a story to tell"))
+                    Conversation(messages = SampleData.conversationSample)
                 }
             }
 
@@ -77,6 +79,17 @@ fun MessageCard(msg: Message) {
     }
 }
 
+@Composable
+fun Conversation(messages: List<Message>) {
+    LazyColumn {
+        items(messages) { message ->
+            MessageCard(msg = message)
+
+        }
+    }
+
+}
+
 @Preview(showBackground = true, name = "Light Mode")
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "Dark Mode")
 @Composable
@@ -86,6 +99,4 @@ fun MessagePreview() {
             MessageCard(msg = Message("Jeff", "I have a story to tell"))
         }
     }
-
-
 }
